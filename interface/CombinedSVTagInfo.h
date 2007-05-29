@@ -16,7 +16,8 @@ namespace reco {
      *  the tagging variables, and the discriminator.
      */
     CombinedSVTagInfo( const reco::TaggingVariableList &,
-                 double discriminator );
+                 double discriminator,
+                 const JetTracksAssociationRef & jtaRef);
 
     CombinedSVTagInfo();
 
@@ -24,6 +25,7 @@ namespace reco {
 
     float discriminator() const;
     const TaggingVariableList & variables() const;
+    TaggingVariableList taggingVariables(void) const    { return vars_; }
     virtual CombinedSVTagInfo * clone() const;
 
   private:

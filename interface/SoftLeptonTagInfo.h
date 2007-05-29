@@ -6,8 +6,8 @@
 #include "DataFormats/TrackReco/interface/Track.h"
 #include "DataFormats/TrackReco/interface/TrackFwd.h"
 #include "DataFormats/JetReco/interface/Jet.h"
-#include "DataFormats/BTauReco/interface/JetTracksAssociation.h"
 #include "DataFormats/BTauReco/interface/JetTagInfo.h"
+#include "DataFormats/BTauReco/interface/TaggingVariable.h"
 #include "DataFormats/BTauReco/interface/SoftLeptonTagInfoFwd.h"
 
 namespace reco {
@@ -15,13 +15,15 @@ namespace reco {
 class SoftLeptonProperties {
 public:
     enum {
-        AXIS_ORIGINAL = 0,  // use the original (calorimietric) jet axis
-        AXIS_CHARGED  = 1,  // refine jet axis from all charged tracks
-        AXIS_EXCLUDED = 2   // refine, without the tagging lepton track
+        AXIS_CALORIMETRIC             = 0,  // use the calorimietric jet axis
+        AXIS_CHARGED_AVERAGE          = 1,  // refine jet axis using charged tracks: use a pT-weighted average of (eta, phi)
+        AXIS_CHARGED_AVERAGE_NOLEPTON = 2,  // as above, without the tagging lepton track
+        AXIS_CHARGED_SUM              = 3,  // refine jet axis using charged tracks: use the sum of tracks momentum
+        AXIS_CHARGED_SUM_NOLEPTON     = 4   // as above, without the tagging lepton track
     };
 
     unsigned int axisRefinement;            // if and how the jet axis is refined
-    double sip3d;                           // 3D signed inpact parameter
+    double sip3d;                           // 3D signed impact parameter
     double ptRel;                           // transverse momentum wrt. jet axis
     double etaRel;                          // (pseudo)rapidity along jet axis
     double deltaR;                          // pseudoangular distance to jet axis
@@ -44,33 +46,24 @@ public:
         return m_leptons.size(); 
     } 
 
-    TrackRef lepton(size_t i) const {
-        // return find_iterator(i)->key;
+    const TrackRef & lepton(size_t i) const {
         return m_leptons[i].first;
     }
     
-    const SoftLeptonProperties& properties(size_t i) const {
-        // return find_iterator(i)->val;
+    const SoftLeptonProperties & properties(size_t i) const {
         return m_leptons[i].second;
     }
 
-    void insert(TrackRef lepton, const SoftLeptonProperties& properties) {
-        // m_leptons.insert( lepton, properties );
+    void insert(const TrackRef & lepton, const SoftLeptonProperties & properties) {
         m_leptons.push_back( std::pair< TrackRef, SoftLeptonProperties > (lepton, properties) );
     }
+
+    /// returns a description of the extended informations in a TaggingVariableList
+    virtual TaggingVariableList taggingVariables(void) const;
 
 private:
     LeptonMap m_leptons;
 
-    LeptonMap::const_iterator find_iterator(size_t i) const {
-        LeptonMap::const_iterator it = m_leptons.begin();
-        while (i--) {
-            ++it;
-            if (it == m_leptons.end())
-                throw edm::Exception( edm::errors::InvalidReference, "lepton not found" );
-        }
-        return it;
-    }
 };
 
 }
