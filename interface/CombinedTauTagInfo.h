@@ -4,7 +4,7 @@
 /* class CombinedTauTagInfo
  *  Extended object for the Tau Combination algorithm, 
  *  created: Dec 18 2006,
- *  revised: Jul 02 2007
+ *  revised: Apr 18 2007
  *  author: Ludovic Houchu.
  */
 
@@ -34,15 +34,13 @@ namespace reco {
       thecandidate_needs_LikelihoodRatio_discrimination=false;
       filtered_Tks_.clear();
       signal_Tks_.clear();
-      isol_Tks_.clear();
       theleadTk_signedipt_significance=NAN;
       theleadTk_signedip3D_significance=NAN;
       thesignedflightpath_significance=NAN;
       theTksEt_o_JetEt=NAN;
       theneutralE=NAN;
       theisolneutralE=NAN;
-      theisolneutralEtsum=NAN;
-      theneutralECALClus_number=std::numeric_limits<int>::quiet_NaN();
+      theneutralECALClus_number=numeric_limits<int>::quiet_NaN();
       theneutralECALClus_radius=NAN;
       theneutralE_o_TksEneutralE=NAN;
       theisolneutralE_o_TksEneutralE=NAN;
@@ -77,7 +75,7 @@ namespace reco {
     void setsignalTks(const TrackRefVector& x) { signal_Tks_=x; }
    
     int signalTks_qsum()const{              // NaN : (int)(signal_Tks_.size())=0;   
-      int signal_Tks_qsum_=std::numeric_limits<int>::quiet_NaN();   
+      int signal_Tks_qsum_=numeric_limits<int>::quiet_NaN();   
       if((int)(signal_Tks_.size())!=0){   
 	signal_Tks_qsum_=0;   
 	for(TrackRefVector::const_iterator iTk=signal_Tks_.begin();iTk!=signal_Tks_.end();iTk++){   
@@ -87,10 +85,6 @@ namespace reco {
       return signal_Tks_qsum_;   
     } 
     
-    //the tracks in the isolation band
-    const TrackRefVector& isolTks() const { return isol_Tks_; }
-    void setisolTks(const TrackRefVector& x) { isol_Tks_=x; }
-     
     virtual CombinedTauTagInfo* clone() const{return new CombinedTauTagInfo(*this );}
     
     bool passed_trackerselection()const{return(thecandidate_passed_trackerselection);}
@@ -129,10 +123,6 @@ namespace reco {
    double isolneutralE()const{return(theisolneutralE);} 
    void setisolneutralE(double x){theisolneutralE=x;}
 
-   // sum of Etneutr.clus.,isol.band;
-   double isolneutralEtsum()const{return(theisolneutralEtsum);} 
-   void setisolneutralEtsum(double x){theisolneutralEtsum=x;}
-
    int neutralECALClus_number()const{return(theneutralECALClus_number);}
    void setneutralECALClus_number(int x){theneutralECALClus_number=x;}
 
@@ -166,7 +156,6 @@ namespace reco {
    IsolatedTauTagInfoRef IsolatedTauTagInfoRef_;
    TrackRefVector filtered_Tks_;
    TrackRefVector signal_Tks_;
-   TrackRefVector isol_Tks_;
    bool thecandidate_passed_trackerselection;
    bool thecandidate_is_GoodTauCandidate;
    bool thecandidate_is_infact_GoodElectronCandidate;
@@ -178,7 +167,6 @@ namespace reco {
    double theTksEt_o_JetEt;
    double theneutralE;
    double theisolneutralE;
-   double theisolneutralEtsum;
    int theneutralECALClus_number;
    double theneutralECALClus_radius;
    double theneutralE_o_TksEneutralE;

@@ -28,8 +28,8 @@ namespace reco {
     
     virtual TauImpactParameterInfo* clone() const { return new TauImpactParameterInfo( * this ); }
     
-    float discriminator(double,double,double,bool,bool) const;
-    float discriminator() const;
+    double discriminator(double,double,double,bool,bool) const;
+    double discriminator() const;
     
     const TauImpactParameterTrackData* getTrackData(reco::TrackRef) const;
     void 	         storeTrackData(reco::TrackRef,const TauImpactParameterTrackData&);

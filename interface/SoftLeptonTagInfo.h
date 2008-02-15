@@ -1,6 +1,8 @@
 #ifndef BTauReco_SoftLeptonTagInfo_h
 #define BTauReco_SoftLeptonTagInfo_h
 
+#include <iterator>
+
 #include "DataFormats/TrackReco/interface/Track.h"
 #include "DataFormats/TrackReco/interface/TrackFwd.h"
 #include "DataFormats/JetReco/interface/Jet.h"
@@ -21,13 +23,14 @@ public:
     };
 
     unsigned int axisRefinement;            // if and how the jet axis is refined
-    double sip3d;                           // 3D signed impact parameter
-    double ptRel;                           // transverse momentum wrt. jet axis
-    double etaRel;                          // (pseudo)rapidity along jet axis
-    double deltaR;                          // pseudoangular distance to jet axis
-    double ratio;                           // momentum over jet energy
-    double ratioRel;                        // momentum parallet to jet axis over jet energy
-    double tag;                             // discriminant using this track as tagging lepton
+    float quality;                          // lepton quality
+    float sip2d;                            // 2D signed impact parameter
+    float sip3d;                            // 3D signed impact parameter
+    float ptRel;                            // transverse momentum wrt. jet axis
+    float etaRel;                           // (pseudo)rapidity along jet axis
+    float deltaR;                           // pseudoangular distance to jet axis
+    float ratio;                            // momentum over jet energy
+    float ratioRel;                         // momentum paraller to jet axis over jet energy
 };
 
 class SoftLeptonTagInfo : public JetTagInfo {

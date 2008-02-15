@@ -7,7 +7,7 @@ using namespace edm;
 using namespace reco;
 using namespace std;
 
-float reco::TauImpactParameterInfo::discriminator (double ip_min,double ip_max,double sip_min,bool use_sign, bool use3D) const {
+double reco::TauImpactParameterInfo::discriminator (double ip_min,double ip_max,double sip_min,bool use_sign, bool use3D) const {
 
 	double discriminator = isolatedTaus->discriminator();
 
@@ -26,7 +26,7 @@ float reco::TauImpactParameterInfo::discriminator (double ip_min,double ip_max,d
 	}
 	return discriminator;
 }
-float reco::TauImpactParameterInfo::discriminator() const {
+double reco::TauImpactParameterInfo::discriminator() const {
         //default discriminator: returns the value of the discriminator of the jet tag
 	return isolatedTaus->discriminator();
 }

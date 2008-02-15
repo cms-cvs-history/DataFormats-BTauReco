@@ -1,9 +1,8 @@
+#include "DataFormats/BTauReco/interface/IsolatedTauTagInfo.h"
 #include "DataFormats/Math/interface/Vector.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
-#include "DataFormats/JetReco/interface/CaloJetCollection.h"
-#include "DataFormats/BTauReco/interface/IsolatedTauTagInfo.h"
-
 #include <Math/GenVector/VectorUtil.h>
+#include "DataFormats/JetReco/interface/CaloJetCollection.h"
 
 using namespace edm;
 using namespace reco;

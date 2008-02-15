@@ -1,5 +1,5 @@
-#ifndef DataFormats_BTauReco_IsolatedTauTagInfo_h
-#define DataFormats_BTauReco_IsolatedTauTagInfo_h
+#ifndef BTauReco_TauTagIsolation_h
+#define BTauReco_TauTagIsolation_h
 //
 // \class IsolatedTauTagInfo
 // \short Extended object for the Tau Isolation algorithm.
@@ -10,29 +10,42 @@
 //
 
 
+#include "DataFormats/BTauReco/interface/JetTag.h"
 #include "DataFormats/BTauReco/interface/JTATagInfo.h"
+#include "DataFormats/JetReco/interface/Jet.h"
 #include "DataFormats/BTauReco/interface/JetTracksAssociation.h"
+#include "DataFormats/TrackReco/interface/TrackFwd.h"
 #include "DataFormats/TrackReco/interface/Track.h"
 #include "DataFormats/BTauReco/interface/IsolatedTauTagInfoFwd.h"
+//#include "DataFormats/TrackReco/interface/HelixParameters.h"
 #include "DataFormats/Math/interface/Vector3D.h"
+//Math
+#include "Math/GenVector/VectorUtil.h"
+#include "Math/GenVector/PxPyPzE4D.h"
+//
+using namespace std;
 
 namespace reco { 
 
-  class IsolatedTauTagInfo : public JTATagInfo {
+
+class IsolatedTauTagInfo : public JTATagInfo {
+
   public:
     //default constructor
-    IsolatedTauTagInfo( void ) : 
-      JTATagInfo(),
-      selectedTracks_()
-    { }
+    IsolatedTauTagInfo() {}
 
-    IsolatedTauTagInfo( const TrackRefVector & tracks, const JetTracksAssociationRef & jtaRef ) :
-      JTATagInfo(jtaRef),
-      selectedTracks_(tracks)
-    { }   
 
+    IsolatedTauTagInfo(edm::RefVector<TrackCollection> tracks,const JetTracksAssociationRef & jtaRef):JTATagInfo(jtaRef) 
+      {    
+	track_iterator it = tracks.begin();
+	for(;it!= tracks.end(); it++)
+	  {
+	    selectedTracks_.push_back(*it);
+	  }
+	
+    }
     //destructor
-    virtual ~IsolatedTauTagInfo() {}
+    virtual ~IsolatedTauTagInfo() {};
     
     //get the tracks from the jetTag
     const TrackRefVector allTracks() const { return tracks(); }
@@ -42,21 +55,22 @@ namespace reco {
     
     virtual IsolatedTauTagInfo* clone() const { return new IsolatedTauTagInfo( *this ); }
   
-    // default discriminator: returns the value of the discriminator of the jet tag, i.e. the one computed with the parameters taken from the cfg file
-    float discriminator() const { return -1.; }
+    //default discriminator: returns the value of the discriminator of the jet tag, i.e. the one computed with the parameters taken from the cfg file
+    //   using JTATagInfo::discriminator;
+    float  discriminator() const {return -1.; }
      
-    // methods to be used to recomputed the isolation with a new set of parameters
-    float discriminator( float m_cone, float sig_cone, float iso_con, float pt_min_lt, float pt_min_tk, int nTracksIsoRing = 0) const;
+    //methods to be used to recomputed the isolation with a new set of parameters
+    float discriminator(float m_cone, float sig_cone, float iso_con, float pt_min_lt, float pt_min_tk, int nTracksIsoRing = 0) const;
     float discriminator( math::XYZVector myVector, float m_cone, float sig_cone, float iso_con, float pt_min_lt, float pt_min_tk, int nTracksIsoRing) const;
-    // Used in case the PV is not considered
-    float discriminator( float m_cone, float sig_cone, float iso_con, float pt_min_lt, float pt_min_tk, int nTracksIsoRing, float dz_lt) const;
+    //Used in case the PV is not considered
+    float discriminator(float m_cone, float sig_cone, float iso_con, float pt_min_lt, float pt_min_tk, int nTracksIsoRing, float dz_lt) const;
     float discriminator( math::XYZVector myVector, float m_cone, float sig_cone, float iso_con, float pt_min_lt, float pt_min_tk, int nTracksIsoRing, float dz_lt) const;
     
     // return all tracks in a cone of size "size" around a direction "direction" 
-    const TrackRefVector tracksInCone(const math::XYZVector myVector, const float size, const float pt_min ) const;
-    const TrackRefVector tracksInCone(const math::XYZVector myVector, const float size, const float pt_min, const float z_pv, const float dz_lt ) const;
+    const edm::RefVector<TrackCollection> tracksInCone(const math::XYZVector myVector,const float size,  const float pt_min ) const;
+    const edm::RefVector<TrackCollection> tracksInCone(const math::XYZVector myVector,const float size,  const float pt_min, const float z_pv, const float dz_lt ) const;
     
-    // return the leading track in a given cone around the jet axis or a given direction
+    //return the leading track in a given cone around the jet axis or a given direction
     const TrackRef leadingSignalTrack(const float rm_cone, const float pt_min) const;
     const TrackRef leadingSignalTrack(math::XYZVector myVector, const float rm_cone, const float pt_min) const;
      
@@ -65,4 +79,4 @@ namespace reco {
   };
 }
 
-#endif // DataFormats_BTauReco_IsolatedTauTagInfo_h
+#endif
