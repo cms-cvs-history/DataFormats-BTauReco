@@ -226,5 +226,10 @@ namespace {
     // edm::reftobase::Holder<reco::Jet, reco::GenJetRef>                       rb_gj;
     // edm::reftobase::Holder<reco::Jet, reco::PFJetRef>                        rb_pfj;
 
+    // RefToBase Holders for Tracks
+    edm::RefToBase<reco::Track>                                                 rb_tk;
+    edm::reftobase::IndirectHolder<reco::Track>                                 rb_ih_tk;
+    edm::reftobase::Holder<reco::Track, reco::TrackRef>                         rb_h_tk;
+    // edm::reftobase::Holder<reco::Track, reco::GsfTrackRef>                   rb_h_gsf;
   }
 }

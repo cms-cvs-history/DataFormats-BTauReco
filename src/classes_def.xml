@@ -68,7 +68,7 @@
   <class name="edm::Wrapper<reco::IsolatedTauTagInfoCollection>"/>
 
   <class name="reco::SoftLeptonProperties"/>
-  <class name="std::pair<reco::TrackRef, reco::SoftLeptonProperties>"/>
+  <class name="std::pair<edm::RefToBase<reco::Track>, reco::SoftLeptonProperties>"/>
   <class name="reco::SoftLeptonTagInfo::LeptonMap"/>
 
   <class name="reco::SoftLeptonTagInfo"/>
@@ -194,7 +194,16 @@
   <class name="edm::RefToBase<reco::Jet>" />
   <class name="edm::reftobase::BaseHolder<reco::Jet>" />
   <class name="edm::reftobase::Holder<reco::Jet, reco::CaloJetRef>" />
-  <!-- <class name="edm::reftobase::Holder<reco::Jet, reco::GenJetRef>" /> -->
-  <!-- <class name="edm::reftobase::Holder<reco::Jet, reco::PFJetRef>" /> -->
+  <!-- 
+  <class name="edm::reftobase::Holder<reco::Jet, reco::GenJetRef>" /> 
+  <class name="edm::reftobase::Holder<reco::Jet, reco::PFJetRef>" /> 
+  -->
 
+  <class name="edm::RefToBase<reco::Track>" />
+  <class name="edm::reftobase::BaseHolder<reco::Track>" />
+  <class name="edm::reftobase::IndirectHolder<reco::Track>" />
+  <class name="edm::reftobase::Holder<reco::Track, reco::TrackRef>" />
+  <!--
+  <class name="edm::reftobase::Holder<reco::Track, reco::GsfTrackRef>" />
+  -->
 </lcgdict>
