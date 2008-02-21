@@ -1,11 +1,9 @@
-#ifndef BTauReco_SoftLeptonTagInfo_h
-#define BTauReco_SoftLeptonTagInfo_h
+#ifndef DataFormats_BTauReco_SoftLeptonTagInfo_h
+#define DataFormats_BTauReco_SoftLeptonTagInfo_h
 
-#include <iterator>
-
-#include "DataFormats/TrackReco/interface/Track.h"
+//#include "DataFormats/TrackReco/interface/Track.h"
 #include "DataFormats/TrackReco/interface/TrackFwd.h"
-#include "DataFormats/JetReco/interface/Jet.h"
+//#include "DataFormats/JetReco/interface/Jet.h"
 #include "DataFormats/BTauReco/interface/JetTagInfo.h"
 #include "DataFormats/BTauReco/interface/TaggingVariable.h"
 #include "DataFormats/BTauReco/interface/SoftLeptonTagInfoFwd.h"
@@ -35,19 +33,19 @@ public:
 
 class SoftLeptonTagInfo : public JetTagInfo {
 public:
-    typedef std::vector< std::pair< TrackRef, SoftLeptonProperties > > LeptonMap;
+    typedef std::vector< std::pair< edm::RefToBase<reco::Track>, SoftLeptonProperties > > LeptonMap;
     
     SoftLeptonTagInfo(void) : m_leptons() {}
 
     virtual ~SoftLeptonTagInfo(void) {}
   
-    virtual SoftLeptonTagInfo* clone(void)  const { return new SoftLeptonTagInfo(*this); }
+    virtual SoftLeptonTagInfo* clone(void) const { return new SoftLeptonTagInfo(*this); }
 
     unsigned int leptons(void) const { 
         return m_leptons.size(); 
     } 
 
-    const TrackRef & lepton(size_t i) const {
+    const edm::RefToBase<reco::Track> & lepton(size_t i) const {
         return m_leptons[i].first;
     }
     
@@ -55,8 +53,8 @@ public:
         return m_leptons[i].second;
     }
 
-    void insert(const TrackRef & lepton, const SoftLeptonProperties & properties) {
-        m_leptons.push_back( std::pair< TrackRef, SoftLeptonProperties > (lepton, properties) );
+    void insert(const edm::RefToBase<reco::Track> & lepton, const SoftLeptonProperties & properties) {
+        m_leptons.push_back( std::pair< edm::RefToBase<reco::Track>, SoftLeptonProperties > (lepton, properties) );
     }
 
     /// returns a description of the extended informations in a TaggingVariableList
@@ -69,4 +67,4 @@ private:
 
 }
 
-#endif // BTauReco_SoftLeptonTagInfo_h
+#endif // DataFormats_BTauReco_SoftLeptonTagInfo_h
