@@ -209,17 +209,29 @@ namespace {
 	    
     // RefToBase Holders for TagInfos
     edm::reftobase::Holder<reco::BaseTagInfo, reco::BaseTagInfoRef>             rb_bti;
+    edm::reftobase::RefHolder<reco::BaseTagInfoRef>             		rbh_bti;
     edm::reftobase::Holder<reco::BaseTagInfo, reco::JTATagInfoRef>              rb_jtati;
+    edm::reftobase::RefHolder<reco::JTATagInfoRef>              		rbh_jtati;
     edm::reftobase::Holder<reco::BaseTagInfo, reco::JetTagInfoRef>              rb_jti;
+    edm::reftobase::RefHolder<reco::JetTagInfoRef>              		rbh_jti;
     edm::reftobase::Holder<reco::BaseTagInfo, reco::TrackCountingTagInfoRef>    rb_tc;
+    edm::reftobase::RefHolder<reco::TrackCountingTagInfoRef>    		rbh_tc;
     edm::reftobase::Holder<reco::BaseTagInfo, reco::TrackIPTagInfoRef>          rb_tcip;
+    edm::reftobase::RefHolder<reco::TrackIPTagInfoRef>          		rbh_tcip;
     edm::reftobase::Holder<reco::BaseTagInfo, reco::CombinedSVTagInfoRef>       rb_csv;
+    edm::reftobase::RefHolder<reco::CombinedSVTagInfoRef>       		rbh_csv;
     edm::reftobase::Holder<reco::BaseTagInfo, reco::SecondaryVertexTagInfoRef>  rb_sv;
+    edm::reftobase::RefHolder<reco::SecondaryVertexTagInfoRef>  		rbh_sv;
     edm::reftobase::Holder<reco::BaseTagInfo, reco::CombinedTauTagInfoRef>      rb_ct;
+    edm::reftobase::RefHolder<reco::CombinedTauTagInfoRef>      		rbh_ct;
     edm::reftobase::Holder<reco::BaseTagInfo, reco::IsolatedTauTagInfoRef>      rb_it;
+    edm::reftobase::RefHolder<reco::IsolatedTauTagInfoRef>      		rbh_it;
     edm::reftobase::Holder<reco::BaseTagInfo, reco::SoftLeptonTagInfoRef>       rb_sl;
+    edm::reftobase::RefHolder<reco::SoftLeptonTagInfoRef>       		rbh_sl;
     edm::reftobase::Holder<reco::BaseTagInfo, reco::TauMassTagInfoRef>          rb_tmt;
+    edm::reftobase::RefHolder<reco::TauMassTagInfoRef>          		rbh_tmt;
     edm::reftobase::Holder<reco::BaseTagInfo, reco::TrackProbabilityTagInfoRef> rb_tp;
+    edm::reftobase::RefHolder<reco::TrackProbabilityTagInfoRef> 		rbh_tp;
     
     // RefToBase Holders for Jets
     edm::reftobase::Holder<reco::Jet, reco::CaloJetRef>                         rb_cj;
