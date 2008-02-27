@@ -208,6 +208,8 @@ namespace {
     std::vector<Measurement1D>                                          vm1d;
 	    
     // RefToBase Holders for TagInfos
+    edm::RefToBase<reco::BaseTagInfo>						rb;
+    edm::reftobase::IndirectHolder<reco::BaseTagInfo>				rbh;
     edm::reftobase::Holder<reco::BaseTagInfo, reco::BaseTagInfoRef>             rb_bti;
     edm::reftobase::RefHolder<reco::BaseTagInfoRef>             		rbh_bti;
     edm::reftobase::Holder<reco::BaseTagInfo, reco::JTATagInfoRef>              rb_jtati;
