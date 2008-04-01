@@ -137,11 +137,9 @@
 
   <class name="reco::JetCrystalsAssociation"/>
   <class name="reco::JetCrystalsAssociationCollection"/>
-  <!-- these are TOO LONG and trash something causing a bad SEGFAULT during CMSSW initialization
   <class name="reco::JetCrystalsAssociationRef"/>
   <class name="reco::JetCrystalsAssociationRefProd"/>
   <class name="reco::JetCrystalsAssociationRefVector"/>
-  -->
   <class name="edm::Wrapper<reco::JetCrystalsAssociationCollection>"/>
 
   <class name="reco::JetEisolAssociation"/>
@@ -151,6 +149,7 @@
   <class name="reco::JetEisolAssociationRefVector"/>
   <class name="edm::Wrapper<reco::JetEisolAssociationCollection>"/>
 
+  <class name="std::pair<edm::RefToBase<reco::Jet>,edm::RefVector<std::vector<ROOT::Math::LorentzVector<ROOT::Math::PtEtaPhiE4D<double> > >,ROOT::Math::LorentzVector<ROOT::Math::PtEtaPhiE4D<double> >,edm::refhelper::FindUsingAdvance<std::vector<ROOT::Math::LorentzVector<ROOT::Math::PtEtaPhiE4D<double> > >,ROOT::Math::LorentzVector<ROOT::Math::PtEtaPhiE4D<double> > > > >"/>
   <!--
   <class name="reco::JetTracksIPDataAssociation"/>
   <class name="edm::AssociationMap<edm::OneToValue<reco::JetTracksAssociationCollection, reco::TracksInJetData, unsigned int> >">
