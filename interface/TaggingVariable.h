@@ -79,6 +79,10 @@ namespace reco {
       trackP0Par,                               // track momentum along the jet axis, in the jet rest frame
       trackP0ParRatio,                          // track momentum along the jet axis, in the jet rest frame, normalized to its energy"
       trackChi2,                                // track fit chi2
+      trackNTotalHits,                          // number of valid total hits
+      trackNPixelHits,                          // number of valid pixel hits
+
+      algoDiscriminator,                        // discriminator output of an algorithm
 
       lastTaggingVariable
     };
