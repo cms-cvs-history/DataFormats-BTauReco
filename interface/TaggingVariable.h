@@ -79,10 +79,6 @@ namespace reco {
       trackP0Par,                               // track momentum along the jet axis, in the jet rest frame
       trackP0ParRatio,                          // track momentum along the jet axis, in the jet rest frame, normalized to its energy"
       trackChi2,                                // track fit chi2
-      trackNTotalHits,                          // number of valid total hits
-      trackNPixelHits,                          // number of valid pixel hits
-
-      algoDiscriminator,                        // discriminator output of an algorithm
 
       lastTaggingVariable
     };
@@ -157,7 +153,9 @@ namespace reco {
     void insert( TaggingVariableName tag, TaggingValue value, bool delayed = false );
     void insert( TaggingVariableName tag, const std::vector<TaggingValue> & values, bool delayed = false );
 
-    void finalize( void );
+    void finalize( void ) {
+      stable_sort( m_list.begin(), m_list.end(), TaggingVariableCompare() );
+    }
     
     TaggingValue get( TaggingVariableName tag ) const;
     TaggingValue get( TaggingVariableName tag, TaggingValue defaultValue ) const;

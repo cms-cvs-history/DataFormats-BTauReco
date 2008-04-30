@@ -71,11 +71,8 @@ const char* TaggingVariableDescription[] = {
   /* [trackP0Par]                               = */ "track momentum along the jet axis, in the jet rest frame",
   /* [trackP0ParRatio]                          = */ "track momentum along the jet axis, in the jet rest frame, normalized to its energy"
   /* [trackChi2]                                = */ "chi2 of the track fit",
-  /* [trackNTotalHits],                         = */ "number of valid total hits",
-  /* [trackNPixelHits],                         = */ "number of valid pixel hits",
-
-  /* [algoDiscriminator],                       = */ "discriminator output of an algorithm",
-
+              
+  
   /* [lastTaggingVariable]                      = */ ""
 };
 
@@ -142,10 +139,6 @@ const char* TaggingVariableTokens[] = {
   /* [trackP0Par]                               = */ "trackP0Par",
   /* [trackP0ParRatio]                          = */ "trackP0ParRatio",
   /* [trackChi2]                                = */ "trackChi2",
-  /* [trackNTotalHits],                         = */ "trackNTotalHits",
-  /* [trackNPixelHits],                         = */ "trackNPixelHits",
-
-  /* [algoDiscriminator],                       = */ "algoDiscriminator",
 
   /* [lastTaggingVariable]                      = */ "lastTaggingVariable"
 };
@@ -184,10 +177,6 @@ void TaggingVariableList::insert( const TaggingVariableList & list ) {
   vector<TaggingVariable>::size_type size = m_list.size();
   m_list.insert( m_list.end(), list.m_list.begin(), list.m_list.end() );
   inplace_merge( m_list.begin(), m_list.begin() + size, m_list.end(), TaggingVariableCompare() );
-}
-
-void TaggingVariableList::finalize( void ) {
-  stable_sort( m_list.begin(), m_list.end(), TaggingVariableCompare() );
 }
 
 TaggingValue TaggingVariableList::get( TaggingVariableName tag ) const {
